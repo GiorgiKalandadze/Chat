@@ -10,7 +10,6 @@ const path = require('path');
 app.use(jsonParser) 
 app.use(express.static(__dirname + '/public'));
 
-
 const MongoClient = require('mongodb').MongoClient;
 MongoClient.connect(Config.options.dbURL,{          //Setup MongoClient
         useNewUrlParser: true, 
@@ -29,7 +28,6 @@ const server = app.listen(Config.options.port, () => {
 });
 const io = socket(server); 
 
-
 const everyone = ['Giorgi', 'Shota', 'Nika', 'Temo']; //For simplicity, I won't keep it in database
 
 app.post('/Login',  (req, res) => {
@@ -42,7 +40,6 @@ app.post('/Login',  (req, res) => {
 });
 app.get('/*',  (req, res) => {
     res.sendFile(path.join(__dirname, './public', 'index.html'));
-
 });
 
 io.use((socket, next) => {
@@ -91,7 +88,6 @@ io.on('connection', (socket) => { //Listen for 'connection' event. Each client h
     });
     socket.on('typing', (username, message) => {
         if(message === ''){
-
             socket.broadcast.emit('user_typing', {username:username, stopped:true});
         } else {
             socket.broadcast.emit('user_typing', {username:username, stopped:false});
