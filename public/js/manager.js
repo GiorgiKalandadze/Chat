@@ -129,6 +129,7 @@ class Manager {
                 const arr = [data.username];
                 if(!tmp.includes(data.username)){    
                     Manager.chatApp.typingArray = tmp.concat(arr);
+                    Manager.chatApp.moveScroll();
                 }
             }
         });
